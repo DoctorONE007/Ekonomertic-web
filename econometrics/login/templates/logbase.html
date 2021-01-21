@@ -1,0 +1,19 @@
+<html>
+        <head>
+                {% load static %}
+                <link href="{% static 'login/style.css' %}" rel="stylesheet" >
+        </head>
+        <body>
+                {% load static %}
+                <div class="header-wrap">
+                        <div class="header">
+                                <img src="{% static 'login/logo.png' %}" class="logo" />
+                                {% block barelements %}{% endblock %}
+                        </div>
+                </div>
+                <div class="main">
+                        {% block pagecontent %}{% endblock %}
+                </div>
+        </body>
+</html>
+

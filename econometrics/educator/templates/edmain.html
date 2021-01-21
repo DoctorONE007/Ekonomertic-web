@@ -1,0 +1,51 @@
+{% extends 'edbase.html' %}
+
+{% block barelements %}
+
+	<p class="logininfo">
+		Вы вошли как: {{educator.name}} {{educator.family_name}} {{educator.fathers_name}}
+	</p>
+	<form class="logout" action="toLogin" method="GET">
+		<input class="logout button" type="submit" value="Выйти из учетной записи" />
+	</form>
+
+{% endblock %}
+
+{% block pagecontent %}
+
+	<div class="mainmenu">
+		<a href="edassigntask" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Назначить задачу
+			</div>
+		</a>
+		<a href="topics" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+                Создать новый шаблон задачи
+			</div>
+		</a>
+		<a href="edgeneratetask" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Сгенерировать задачу
+			</div>
+		</a>
+		<br />
+		<a href="edstatistics" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Статистика
+			</div>
+		</a>
+		<a href="edprofile" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Профиль
+			</div>
+		</a>
+		<a href="edsupport" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Поддержка
+			</div>
+		</a>
+	</div>
+
+{% endblock %}
+

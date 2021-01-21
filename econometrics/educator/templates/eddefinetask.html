@@ -1,0 +1,48 @@
+{% extends 'eddefaultpage.html' %}
+
+{% block pagename %}Создать задачу{% endblock %}
+
+{% block pagecontent %}
+
+<form class="definetask" action="{% url 'edu:edworkontask' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="src" value="{{ src }}">
+    <div class="taskmain-wrap">
+        <div class="taskmain">
+            <label>
+                Тема
+                <input type="text" name="subject" value="{{ subject }}" placeholder="Тема" />
+            </label>
+            <label>
+                Сложность
+                <select name="difficulty" class="button">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </label>
+            <input type="submit" name="save" value="Сохранить" class="button" />
+            <br>
+            <label>
+                Описание
+                <textarea name="description">{{ description }}</textarea>
+            </label>
+        </div>
+    </div>
+    <div class="taskvars">
+        <div class="taskvarsin">
+            <label>
+                Код генератора
+                <textarea name="generatorText">{{ generatorText }}</textarea>
+            </label>
+        </div>
+        <div class="taskvarsout">
+            <label>
+                Код проверяющей системы
+                <textarea name="checkerText">{{ checkerText }}</textarea>
+            </label>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

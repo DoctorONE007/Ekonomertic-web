@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block barelements %}
+
+	<p class="logininfo">
+		Вы вошли как: {{student.name}} {{student.family_name}} {{student.fathers_name}}
+	</p>
+	<form class="logout" action="toLogin" method="GET">
+		<input class="logout button" type="submit" value="Выйти из учетной записи" />
+	</form>
+
+{% endblock %}
+
+{% block pagecontent %}
+
+	<div class="mainmenu">
+		<a href="currenttasks" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Текущие Задачи
+			</div>
+		</a>
+		<a href="generatetask" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Сгенерировать Задачу
+			</div>
+		</a>
+		<a href="history" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				История Задач
+			</div>
+		</a>
+		<br />
+		<a href="statistics" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Статистика
+			</div>
+		</a>
+		<a href="profile" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Профиль
+			</div>
+		</a>
+		<a href="support" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Поддержка
+			</div>
+		</a>
+	</div>
+
+{% endblock %}
+

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block barelements %}
+
+    <a href="{% url 'stud:main' %}" class="button backbutton">
+            Назад
+    </a>
+    <p class="pagename">
+            {% block pagename %}{% endblock %}
+    </p>
+
+    {% block logoutbutton %}{% endblock %}
+    
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'edbase.html' %}
+
+{% block barelements %}
+
+    <a href="{% url 'edu:edmain' %}" class="button backbutton">
+        На главную
+    </a>
+    <a href="" onclick="history.back()" class="button backbutton">
+        Назад
+    </a>
+    <p class="pagename">
+        Назначить задачу
+    </p>
+
+{% endblock %}
+
+{% block pagecontent %}
+    <label name="errors">{{ message }}</label>
+    <form method="post" action="{% url 'edu:edassigntask' %}">
+        <div class="radioblock">
+            {% csrf_token %}
+            <div class="topicsFrame">
+                <div class="topicBlock">
+                    <div class="chooseLabel">
+                        Выберите тему:
+                    </div>
+                    <input name="step4" value="true" type="hidden"/>
+                    {% for topic in topics %}
+                        <input class="button" type="submit" name="topic" value="{{ topic }}"/>
+                        <input name="topicsid[]" value="{{ topic.id }}" type="hidden"/>
+                    {% endfor %}
+                </div>
+                {% if templates %}
+                    <div class="topicBlock">
+                        <div class="chooseLabel">
+                            Выберите шаблон:
+                        </div>
+                        <div class="tasktemplateslist">
+                            {% for tt in templates %}
+                                <label class="entry"><input type="radio" name="tasktemplate"
+                                        {% if tt == templates.0 %} checked='checked' {% endif %}
+                                                            value="{{ tt.id }}"> {{ tt }}
+                                </label><br>
+                            {% endfor %}
+                        </div>
+                        <input class="button" type="submit" name="step5" value="Продолжить"/>
+                    </div>
+                {% endif %}
+            </div>
+            <div>
+                <label><input type="radio" checked="checked" name="valchoice" value="random"> Выбрать значения
+                    случайно</label><br>
+                <label><input type="radio" name="valchoice" value="inlist"> Разные значения у студентов</label><br>
+            </div>
+            <div class="studentslist">
+                {% for stud in students %}
+                    <div class="entry">
+                        <label><input type="hidden" name="students[]" value="{{stud.id}}"> {{stud}}</label>
+                    </div>
+                {% endfor %}
+            </div>
+            <div>
+                <textarea name="args">{{ args }}</textarea>
+            </div>
+        </div>
+    </form>
+{% endblock %}

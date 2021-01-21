@@ -1,0 +1,29 @@
+{% extends 'defaultpage.html' %}
+
+{% block pagename %}Статистика{% endblock %}
+{% block pagecontent %}
+
+    <div class="statsFrame">
+        <form class="topicsFrame" action="{% url 'stud:change_topic' %}" method="POST">
+
+            {% csrf_token %}
+
+            <div class="grpbtn">
+                {% for topic in topics %}
+                    <button type="submit" name="{{ topic }}">{{ topic }}</button>
+                {% endfor %}
+
+            </div>
+        </form>
+        <div class="infoFrame">
+            <div class="infoText">
+                Решено задач - {{ solved }}
+            </div>
+            <div class="infoText">
+                Всего задач - {{ all }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

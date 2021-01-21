@@ -1,0 +1,43 @@
+{% extends 'edbase.html' %}
+
+{% block barelements %}
+
+    <a href="{% url 'edu:edmain' %}" class="button backbutton">
+        На главную
+    </a>
+    <form action="{% url 'edu:stats_student_detailed' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="stud_id" value="{{ stud_id }}">
+        <button type="submit" name="group_id" value="{{ group_id }}" class="button backButton">
+            Назад
+        </button>
+    </form>
+    <p class="pagename">
+        {{ task.template.topic }}
+    </p>
+
+{% endblock %}
+
+{% block pagecontent %}
+
+    <div class="taskDescription">
+        {{ task }}
+    </div>
+
+    {% if task.solved %}
+        <div class="text-success">
+            Задача решена
+        </div>
+    {% else %}
+        <div class="alert-danger">
+            Задача не решена
+        </div>
+    {% endif %}
+
+    {% for storage in labelsandstored %}
+        <div class="answerLabel">{{ storage.label }}</div>
+        <label name="trueanswer">Правильный ответ: {{ storage.answer }}</label>
+        <input type="text" class="entryFrame" name="{{ storage.label }}" value="{{ storage.stored }}" disabled>
+    {% endfor %}
+
+{% endblock %}

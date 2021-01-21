@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="{% static 'educator/style.css' %}" rel="stylesheet">
+</head>
+<body>
+{% load static %}
+<div class="header-wrap">
+    <div class="header">
+        <img src="{% static 'educator/logo.png' %}" class="logo"/>
+        <a href="{% url 'edu:edmain' %}" class="button backbutton">
+            Назад
+        </a>
+        <p class="pagename">
+            {{ topic }}({{ difficulty }})
+        </p>
+    </div>
+</div>
+<div class="main">
+    <div class="taskDescription">
+        {{ description }}
+    </div>
+    <div class="text-success">
+        Ответ: {{ answer }}
+    </div>
+
+    {% for label in labels %}
+        <div class="answerLabel">{{ label }}</div>
+        <input type="text" class="entryFrame" disabled>
+    {% endfor %}
+</div>
+</body>
+</html>

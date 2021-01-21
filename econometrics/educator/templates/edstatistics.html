@@ -1,0 +1,20 @@
+{% extends 'eddefaultpage.html' %}
+
+{% block pagename %}Студенты: группа{% endblock %}
+
+{% block pagecontent %}
+
+    <form method="POST" action="{% url 'edu:stats_students' %}">
+
+        {% csrf_token %}
+
+        <div class="groupslist">
+        {% for group in groups %}
+            <div class="entry">
+                <input class="button" type="submit" name="group" value="{{ group.number }}">
+            </div>
+        {% endfor %}
+        </div>
+    </form>
+
+{% endblock %}

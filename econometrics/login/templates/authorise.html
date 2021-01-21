@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="{% static 'student/style.css' %}" rel="stylesheet">
+</head>
+<body>
+{% load static %}
+<div class="main">
+    <div class="loginForm">
+
+        <div class="loginTitle">
+            <img src="{% static 'student/logo.png' %}"/>
+            <div class="title">
+                Генератор задач по дисциплине "Эконометрика"
+            </div>
+            <div class="formName">
+                Авторизация
+            </div>
+        </div>
+        <label name="errors">{{ errors }}</label>
+        <form class="loginFrame" action="{% url 'login:logcheck' %}" method="post">
+            {% csrf_token %}
+            <div class="entryLabel">
+                Почта
+            </div>
+            <input type="text" class="entryFrame" name="login">
+            <div class="entryLabel">
+                Пароль
+            </div>
+            <input type="password" class="entryFrame" name="password">
+            <button type="submit" class="logButton">
+                Войти
+            </button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

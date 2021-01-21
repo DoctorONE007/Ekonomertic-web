@@ -1,0 +1,22 @@
+{% extends 'eddefaultpage.html' %}
+
+{% block pagename %}Студенты: группа{% endblock %}
+
+{% block pagecontent %}
+
+    <form method="POST" xmlns="http://www.w3.org/1999/html">
+
+        {% csrf_token %}
+
+        <div class="groupslist">
+        {% for grp in groups %}
+            <div class="entry">
+                <input class="button" type="submit" name="group" value="{{ grp.number }}">
+                <input type="checkbox" name="groups[]" value="{{ grp.number }}" />
+            </div>
+        {% endfor %}
+        </div>
+        <input type="submit" name="step2" value="Назначить" class="button" />
+    </form>
+
+{% endblock %}

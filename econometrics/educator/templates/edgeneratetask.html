@@ -1,0 +1,84 @@
+{% extends 'eddefaultpage.html' %}
+
+{% block pagename %}Сгенерировать задачу{% endblock %}
+
+{% block pagecontent %}
+
+    <div class="edtask">
+
+        <form class="edtaskGenOptions" action="{% url 'edu:edgeneratetask' %}" method="POST">
+
+            {% csrf_token %}
+            <div class="edtopicBlock">
+                <div class="edchooseLabel">
+                    Выберите тему:
+                </div>
+                <div class="edfround">
+                    <div class="edgrpbtn">
+                        {% for topic in topics %}
+                            <button type="submit" class="edtopicButton" name="group_id" value="{{ topic.id }}">
+                                {{ topic }}
+                            </button>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="eddifficultyBlock">
+
+                <div class="edchooseLabel">
+                    Выберите сложность:
+                </div>
+                <div class="edsround">
+                    <label class="edcontainer">Простая задача
+                        <input type="radio" checked="checked" name="difficulty" value="1">
+                        <span class="edcheckmark"></span>
+                    </label>
+                    <label class="edcontainer">Средняя задача
+                        <input type="radio" name="difficulty" value="2">
+                        <span class="edcheckmark"></span>
+                    </label>
+                    <label class="edcontainer">Задача со звездочкой
+                        <input type="radio" name="difficulty" value="3">
+                        <span class="edcheckmark"></span>
+                    </label>
+
+                </div>
+            </div>
+        </form>
+
+        <div class="edtaskGenChoose">
+            <form action="{% url 'edu:edpregeneratedtask' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="edhistoryFrame">
+                    {% if tempNum == 0 %}
+                        Выберите интересующие темы и сложность задач.
+                    {% else %}
+                        {% for temp in templates %}
+                            <button class="edhistoryTask" type="submit" name="task_id" value="{{ temp.id }}">
+                                Тема: {{ temp.topic }}
+                                <hr>
+                                Сложность -
+                                {{ temp.difficulty }}
+                                {% if temp.difficulty == 3 %}
+                                    (Сложная)
+                                {% elif temp.difficulty == 2 %}
+                                    (Средняя)
+                                {% else %}
+                                    (Легкая)
+                                {% endif %}
+                                <hr>
+                                {{ temp }}
+                            </button>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}

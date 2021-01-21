@@ -1,0 +1,38 @@
+{% extends 'edbase.html' %}
+
+{% block barelements %}
+
+    <a href="{% url 'edu:edmain' %}" class="button backbutton">
+        На главную
+    </a>
+    <a href="" onclick="history.back()" class="button backbutton">
+        Назад
+    </a>
+    <p class="pagename">
+        Студенты: список
+    </p>
+
+{% endblock %}
+
+{% block pagecontent %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="studentslist">
+        {% for stud in students %}
+            <div class="entry">
+                <label>
+                    {{ stud.label }}
+                    <input type="checkbox" name="students[]" value="{{ stud.id }}"
+                    {% if check %}
+                    checked="checked"
+                    {% endif %}
+                    />
+                </label>
+            </div>
+        {% endfor %}
+        </div>
+        <input type="submit" name="step3" value="Назначить" class="button" />
+    </form>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'defaultpage.html' %}
+
+{% block pagename %}Профиль{% endblock %}
+
+{% block logoutbutton %}
+
+    <form class="logout" action="toLogin" method="GET">
+        <input class="logout button" type="submit" value="Выйти из учетной записи" />
+    </form>
+
+{% endblock %}
+{% block pagecontent %}
+
+<div class="profile">
+    <div class="clearfix">
+        <div class="text">
+            Имя пользователя
+        </div>
+        <div class="alttext">
+            {{student}}
+        </div>
+        <div class="text">
+            Группа
+        </div>
+        <div class="alttext">
+            {{student.groupNumber}}
+        </div>
+        <div class="text">
+            Корпоративная почта
+        </div>
+        <div class="alttext">
+            {{student.creator.username}}
+        </div>
+        <div class="roww">
+            <a class="button" type="submit" href="{% url 'stud:changepassword' %}">Сменить пароль</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

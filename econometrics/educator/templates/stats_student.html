@@ -1,0 +1,52 @@
+{% extends 'edbase.html' %}
+
+{% block barelements %}
+
+    <a href="{% url 'edu:edmain' %}" class="button backbutton">
+            На главную
+    </a>
+    <form action="{% url 'edu:stats_students' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="group" value="{{ student.groupNumber }}" class="button backButton">
+                    Назад
+            </button>
+    </form>
+    <p class="pagename">
+            Статистика студента
+    </p>
+
+    {% block logoutbutton %}{% endblock %}
+
+{% endblock %}
+
+{% block pagecontent %}
+
+    <div class="statsFrame">
+        <form class="topicsFrame" action="{% url 'edu:stats_student' %}" method="POST">
+
+            {% csrf_token %}
+            <input type="hidden" name="stud_id" value="{{ student.id }}">
+            <div class="grpbtn">
+                {% for topic in topics %}
+                    <button type="submit" name="group_id" value="{{ topic.id }}">{{ topic }}</button>
+                {% endfor %}
+
+            </div>
+        </form>
+        <div class="infoFrame">
+            <div class="infoText">
+                Решено задач - {{ solved }}
+            </div>
+            <div class="infoText">
+                Всего задач - {{ all }}
+            </div>
+        </div>
+        <form action="{% url 'edu:stats_student_detailed' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="stud_id" value="{{ student.id }}">
+            <input type="hidden" name="group_id" value="{{ group_id }}">
+            <input type="submit" value="Подробнее" class="button"/>
+        </form>
+    </div>
+
+{% endblock %}

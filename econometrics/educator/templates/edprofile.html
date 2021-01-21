@@ -1,0 +1,32 @@
+{% extends 'eddefaultpage.html' %}
+
+{% block pagename %}Профиль{% endblock %}
+
+{% block logoutbutton %}
+
+    <form class="logout" action="toLogin" method="GET">
+        <input class="logout button" type="submit" value="Выйти из учетной записи" />
+    </form>
+
+{% endblock %}
+{% block pagecontent %}
+
+<div class="profile">
+    <div class="clearfix">
+        <div class ="text">
+            Имя пользователя</div>
+        <div class ="alttext">
+            {{educator.name}} {{educator.family_name}} {{educator.fathers_name}}</div>
+        <div class ="text">
+            Корпоративная почта</div>
+        <div class ="alttext">
+            {{ educator.creator.username }}</div>
+    </div>
+
+    <div class="roww">
+            <a class="button" type="submit" href="{% url 'edu:edchangepassword' %}">Сменить пароль</a>
+    </div>
+
+</div>
+
+{% endblock %}

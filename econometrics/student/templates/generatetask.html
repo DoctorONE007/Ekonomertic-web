@@ -1,0 +1,100 @@
+{% extends 'defaultpage.html' %}
+
+{% block pagename %}Сгенерировать задачу{% endblock %}
+
+{% block pagecontent %}
+
+<div class="task">
+
+    <form class="taskGenOptions" action="{% url 'stud:find_templates' %}" method="POST">
+
+        {% csrf_token %}
+
+        <div class="topicBlock">
+
+            <div class="chooseLabel">
+                Выберите тему:
+            </div>
+            <div class="fround">
+                <div class="grpbtn">
+                    {% for topic in topics %}
+                    <label class="topicButton">
+                        <input type="checkbox" name="{{ topic }}">
+                        {{ topic }}
+                    </label>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="difficultyBlock">
+
+            <div class="chooseLabel">
+                Выберите сложность:
+            </div>
+            <div class="sround">
+                <label class="container">Простая задача
+                    <input type="radio" checked="checked" name="difficulty" value="1">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Средняя задача
+                    <input type="radio" name="difficulty" value="2">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Задача со звездочкой
+                    <input type="radio" name="difficulty" value="3">
+                    <span class="checkmark"></span>
+                </label>
+
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn-gen">Показать задачи</button>
+        </div>
+
+    </form>
+
+    <div class="taskGenChoose">
+        <form action="{% url 'stud:gen_templates' %}" method="POST">
+            <div class="historyFrame">
+                {% csrf_token %}
+
+                {% if tempNum == 0 %}
+                Выберите интересующие темы и сложность задач.
+                {% else %}
+                {% for temp in templates %}
+                <label class="historyTask">
+                    <input type="checkbox" name="{{ temp.id }}">
+                    Тема: {{ temp.topic }}
+                    <hr>
+
+                    Сложность -
+                    {{ temp.difficulty }}
+                    {% if temp.difficulty == 3 %}
+                    (Сложная)
+                    {% elif temp.difficulty == 2 %}
+                    (Средняя)
+                    {% else %}
+                    (Легкая)
+                    {% endif %}
+                    <hr>
+
+                    {{ temp }}
+                </label>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {% if tempNum != 0 %}
+            <div>
+                <button type="submit" class="btn-gen">Сгенерировать выбранные</button>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

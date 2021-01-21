@@ -1,0 +1,20 @@
+{% extends 'eddefaultpage.html' %}
+
+{% block pagename %}Студенты: список{% endblock %}
+
+{% block pagecontent %}
+
+    <form method="POST" action="{% url 'edu:stats_student' %}">
+
+        {% csrf_token %}
+
+        <div class="groupslist">
+        {% for student in students %}
+            <div class="entry">
+                <button class="button" type="submit" name="stud_id" value="{{ student.id }}">{{ student }}</button>
+            </div>
+        {% endfor %}
+        </div>
+    </form>
+
+{% endblock %}

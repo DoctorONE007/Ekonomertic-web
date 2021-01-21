@@ -1,0 +1,20 @@
+{% extends 'eddefaultpage.html' %}
+
+{% block pagename %}Создать группу{% endblock %}
+
+{% block pagecontent %}
+
+<form class="groupadd" action="{% url 'edu:edcreategroup' %}" method="POST">
+    {% csrf_token %}
+    <div class="groupadd-wrap">
+        <div class="groupaddtheme">
+
+            <input type="text" name="name">
+
+        </div>
+        <input type="submit" name="save" value="Сохранить" class="groupaddbtn" />
+    </div>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'defaultpage.html' %}
+
+{% block pagename %}Текущие задачи{% endblock %}
+{% block pagecontent %}
+
+    <div class="historyFrame">
+        {% if taskNum == 0 %}
+            Пока тут ничего нет
+        {% else %}
+            {% for task in tasklist %}
+                <a href="{% url 'stud:task' task.numAtStud %}" class="historyTask">
+                    Тема: {{ task.template.topic }}
+                    <hr>
+
+                    Сложность -
+                    {{ task.template.difficulty }}
+                    {% if task.template.difficulty == 3 %}
+                        (Сложная)
+                    {% elif task.template.difficulty == 2 %}
+                        (Средняя)
+                    {% else %}
+                        (Легкая)
+                    {% endif %}
+                    <hr>
+
+                    {{ task }}
+                </a>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+{% endblock %}

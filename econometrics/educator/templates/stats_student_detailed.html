@@ -1,0 +1,66 @@
+{% extends 'edbase.html' %}
+
+{% block barelements %}
+
+    <a href="{% url 'edu:edmain' %}" class="button backbutton">
+            На главную
+    </a>
+    <form action="{% url 'edu:stats_student' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="stud_id" value="{{ stud_id }}">
+            <button type="submit" name="group_id" value="{{ group_id }}" class="button backButton">
+                    Назад
+            </button>
+    </form>
+    <p class="pagename">
+            Подробная статистика студента
+    </p>
+
+    {% block logoutbutton %}{% endblock %}
+
+{% endblock %}
+
+{% block pagecontent %}
+
+    <form class="edhistoryFrame" action="{% url 'edu:edtaskwatch' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="stud_id" value="{{ stud_id }}">
+        {% if taskNum == 0 %}
+            Пока тут ничего нет
+        {% else %}
+            {% for task in tasks %}
+                <input type="hidden" name="group_id" value="{{ group_id }}">
+                <button type="submit" class="edhistoryTask" name="job_id" value="{{ task.numAtStud }}">
+                    Тема: {{ task.template.topic }}
+                    <hr>
+
+                    Сложность -
+                    {{ task.template.difficulty }}
+                    {% if task.template.difficulty == 3 %}
+                        (Сложная)
+                    {% elif task.template.difficulty == 2 %}
+                        (Средняя)
+                    {% else %}
+                        (Легкая)
+                    {% endif %}
+                    <hr>
+
+                    {{ task }}
+                    {% if task.solved %}
+                        <div class="text-success">
+                            Решена
+                        </div>
+                    {% else %}
+                        <div class="text-danger">
+                            Не решена
+                        </div>
+                    {% endif %}
+                    <div class="timeHT">
+                        {{ task.closedTime }}
+                    </div>
+                </button>
+            {% endfor %}
+        {% endif %}
+    </form>
+
+{% endblock %}

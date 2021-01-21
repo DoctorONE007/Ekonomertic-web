@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block barelements %}
+
+    <a href="" onclick="history.back(); return false;" class="button backbutton">
+            Назад
+    </a>
+    <p class="pagename">
+            {{ task.template.topic }}({{ task.template.difficulty }})
+    </p>
+
+{% endblock %}
+
+{% block pagecontent %}
+
+    <div class="taskDescription">
+        {{ task }}
+    </div>
+    <form class="answerBoard" action="{% url 'stud:answer_check' task.numAtStud %}" method="POST">
+
+        {% csrf_token %}
+
+        {% if task.solved %}
+            <div class="text-success">
+                Задача решена
+            </div>
+        {% else %}
+            {% if task.tries_left <= 0 %}
+                <div class="alert-danger">
+                    Задача не решена
+                </div>
+            {% else %}
+                <div class="triesLeftText">
+                    Осталось попыток - {{ task.tries_left }}
+                </div>
+            {% endif %}
+        {% endif %}
+
+        {% for storage in labelsandstored %}
+            <div class="answerLabel">{{storage.label}}</div>
+            <input type="text" class="entryFrame" name="{{storage.label}}" value="{{storage.stored}}"
+             {% if task.solved or task.tries_left <= 0 %}
+                disabled
+             {% endif %}>
+        {% endfor %}
+
+        {% if not task.solved and task.tries_left > 0 %}
+            <button class="taskSubButton"  type="submit">
+                Отправить
+            </button>
+        {% endif %}
+    </form>
+
+{% endblock %}

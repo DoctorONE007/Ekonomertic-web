@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block barelements %}
+
+	<p class="logininfo">
+		Вы вошли как: {{admin.name}} {{admin.family_name}} {{admin.fathers_name}}
+	</p>
+	<form class="logout" action="toLogin" method="GET">
+		<input class="logout button" type="submit" value="Выйти из учетной записи" />
+	</form>
+
+{% endblock %}
+
+{% block pagecontent %}
+
+	<div class="mainmenu">
+		<a href="educators" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Преподаватели
+			</div>
+		</a>
+		<a href="studentgroups" class="mainmenuitemwrap">
+			<div class="button mainmenuitem">
+				Группы студентов
+			</div>
+		</a>
+	</div>
+
+{% endblock %}
+

@@ -1,0 +1,14 @@
+{% extends 'edbase.html' %}
+
+{% block barelements %}
+
+    <a href="{% url 'edu:edmain' %}" class="button backbutton">
+            На главную
+    </a>
+    <p class="pagename">
+            {% block pagename %}{% endblock %}
+    </p>
+
+    {% block logoutbutton %}{% endblock %}
+    
+{% endblock %}

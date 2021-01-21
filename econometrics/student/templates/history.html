@@ -1,0 +1,44 @@
+{% extends 'defaultpage.html' %}
+
+{% block pagename %}История{% endblock %}
+{% block pagecontent %}
+
+    <div class="historyFrame">
+        {% if taskNum == 0 %}
+            Пока тут ничего нет
+        {% else %}
+            {% for task in finished %}
+                <a href="{% url 'stud:task' task.numAtStud %}" class="historyTask">
+                    Тема: {{ task.template.topic }}
+                    <hr>
+
+                    Сложность -
+                    {{ task.template.difficulty }}
+                    {% if task.template.difficulty == 3 %}
+                        (Сложная)
+                    {% elif task.template.difficulty == 2 %}
+                        (Средняя)
+                    {% else %}
+                        (Легкая)
+                    {% endif %}
+                    <hr>
+
+                    {{ task }}
+                    {% if task.solved %}
+                    <div class="text-success">
+                        Решена
+                    </div>
+                    {% else %}
+                    <div class="text-danger">
+                        Не решена
+                    </div>
+                    {% endif %}
+                    <div class="timeHT">
+                        {{ task.closedTime }}
+                    </div>
+                </a>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+{% endblock %}
